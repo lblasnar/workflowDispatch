@@ -4,17 +4,20 @@ defaults:
     shell: bash
 
 on:
-  workflow_call:
-    inputs:
-      aInput:
-        type: string
+  workflow_dispatch:
         
 jobs:
   dispatcher:
     name: "Dispatcher"
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatcher
-        run: |
-          echo "Running dispatcher"
-          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/lblas/workflowDispatch/actions/workflows/build.yaml/dispatches --data '{"ref": "master"}'
+     - uses: actions/github-script@v6
+       with:
+         github-token: ${{ secrets.PAT_TOKEN }}
+         script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'lblasnar',
+              repo: 'testWorkflowDispatch',
+              workflow_id: 'workflow_dispatch.yml',
+              ref: 'main'
+            })
