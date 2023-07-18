@@ -5,7 +5,12 @@ defaults:
 
 on:
   workflow_dispatch:
-        
+
+permissions:
+  contents: write
+  packages: write
+  checks: write
+  
 jobs:
   dispatcher:
     name: "Dispatcher"
