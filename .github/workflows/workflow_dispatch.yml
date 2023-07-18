@@ -1,0 +1,15 @@
+name: Workflow Dispacth manual
+defaults:
+  run:
+    shell: bash
+
+on:
+  workflow_call:
+jobs:
+  dispatcher:
+    name: "Dispatcher"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatcher
+        run: |
+          echo "Running dispatcher"
