@@ -5,12 +5,12 @@ defaults:
 
 on:
   workflow_dispatch:
-  
-permissions:
-  contents: write
-  packages: write
-  checks: write
-  
+    inputs:
+      test:
+        type: string
+        description: 'Something to send to the other workflow'
+        required: true
+        default: 'Foo'
 jobs:
   dispatcher:
     name: 'Dispatcher'
