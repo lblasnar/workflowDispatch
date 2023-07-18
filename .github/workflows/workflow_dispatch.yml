@@ -26,4 +26,7 @@ jobs:
               repo: 'testWorkflowDispatch',
               workflow_id: 'test.yml',
               ref: 'main'
+              inputs: {
+               tags: ${{ inputs.test }}
+              }
             })
