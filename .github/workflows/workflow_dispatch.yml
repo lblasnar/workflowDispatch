@@ -25,5 +25,8 @@ jobs:
               owner: 'lblasnar',
               repo: 'testWorkflowDispatch',
               workflow_id: 'test.yml',
-              ref: 'main'
+              ref: 'main',
+              inputs: {
+                foo: '${{ inputs.test }}',
+              },
             })
