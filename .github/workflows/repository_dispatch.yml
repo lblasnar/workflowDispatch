@@ -1,0 +1,27 @@
+name: Respository Dispacth manual
+defaults:
+  run:
+    shell: bash
+
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        type: string
+        description: 'Something to send to the other workflow'
+        required: true
+        default: 'Foo'
+        
+jobs:
+  dispatcher:
+    name: 'Dispatcher'
+    runs-on: ubuntu-latest
+    steps:
+     - run: | 
+        curl -L \
+        -X POST \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}"\
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/orgs/ORG/repos \
+        -d '{ "event_type": "rep_dispatch",  "client_payload": {"test": "${{ inputs.test}}}}'
